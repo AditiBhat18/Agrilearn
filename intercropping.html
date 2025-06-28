@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Intercropping - AgriLearn</title>
+  <!-- ... identical styling as above ... -->
+  <link rel="stylesheet" href="/static/css/style.css">
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f7fff8;
+      margin: 0;
+      padding: 2em;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+    }
+    h2 {
+      color: #4e944f;
+    }
+    iframe {
+      width: 100%;
+      height: 400px;
+      border-radius: 12px;
+      margin: 1em 0;
+    }
+    p{
+       font-weight:700;
+      line-height:2;
+    }
+   #b {
+      background: #4e944f;
+      color: white;
+      padding: 0.6em 1.2em;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+   #b:hover {
+      background-color: #3d8438;
+    }
+  </style>
+ 
+</head>
+<body>
+   <script>
+    function markCompleted(module) {
+      fetch('/mark_complete', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ module: module })
+      }).then(res => {
+        if (res.ok) alert("Marked as completed ✅");
+        else alert("Something went wrong.");
+      });
+    }
+      </script>
+  <div class="container">
+    <h2>Intercropping</h2>
+    <p>Intercropping is a farming practice where two or more crops are grown together on the same piece of land at the same time. This method helps in better utilization of space, improves soil fertility, and reduces the risk of pests and diseases. For example, planting legumes with cereals can enrich the soil with nitrogen. Intercropping also helps in increasing overall yield and income, making it a sustainable and efficient approach for farmers.</p>  <br> <br>
+    <img src="https://bing.com/th/id/BCO.49099bc7-7d62-49b6-b91c-bc88641fb2d9.png" alt="Intercropping Diagram"height=400px width=800px>  <br> <br>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/HOgxUJ-QtvU?si=EYkloY2tJuJ4Zqyd" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>  <br> <br>
+    <button id="b" onclick="markCompleted('intercropping')">Mark as Completed</button>
+  </div>
+</body>
+</html>

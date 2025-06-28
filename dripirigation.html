@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Composting at Home - AgriLearn</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+
+  <style>
+    body { font-family: 'Poppins', sans-serif; background: #f7fff8; padding: 2em; margin: 0; }
+    .container { max-width: 800px; margin: auto; }
+    h2 { color: #4e944f; }
+    p{
+       font-weight:700;
+      line-height:2;
+    }
+    iframe { width: 100%; height: 400px; border-radius: 12px; margin: 1em 0; }
+    button { background: #4e944f; color: white; padding: 0.6em 1.2em; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
+    button:hover {
+      background-color: #3d8438;
+    }
+  </style>
+  <script>
+    function markCompleted(module) {
+      fetch('/mark_complete', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ module: module })
+      }).then(res => {
+        if (res.ok) alert("Marked as completed ✅");
+        else alert("Something went wrong.");
+      });
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h2>Drip irigation</h2>
+    <p> Drip irrigation is a water-efficient farming method that delivers water directly to the roots of plants through a network of tubes, pipes, and emitters. This system reduces water wastage by minimizing evaporation and runoff, making it ideal for dry regions and water-scarce areas. By providing consistent moisture to the soil, drip irrigation promotes healthy plant growth, improves crop yield, and saves labor and energy. It is especially useful for vegetables, fruit trees, and row crops. </p>  <br> <br>
+    <img src="https://bing.com/th/id/BCO.eea9d9a2-0ef9-402d-a14f-49a3bbc4660a.png" alt="Drip Irigation Diagram"height=400px width=800px>  <br> <br>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/Xej22GsLLQA?si=R0egxZcpxqdcqMrM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>  <br> <br>
+    <button onclick="markCompleted('dripirigation')">Mark as Completed</button>
+  </div>
+</body>
+</html>
