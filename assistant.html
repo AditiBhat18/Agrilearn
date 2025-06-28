@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Crop Assistant - AgriLearn</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+  <style>
+    body {
+      background:#D2E5D0;
+      font-family: 'Poppins', sans-serif;
+      padding: 2em;
+    }
+    .assistant-box {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 2em;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    }
+    h2 {
+      color: #4e944f;
+      margin-bottom: 1em;
+      text-align: center;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 0.8em;
+      font-size: 1em;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      margin-bottom: 1em;
+    }
+    button {
+      width: 100%;
+      background: #013A20;
+      color: white;
+      padding: 0.7em;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #3d8438;
+    }
+    .crop-card {
+      background: #f4fff8;
+      border: 2px solid #d0e8d0;
+      border-radius: 10px;
+      padding: 20px;
+      margin-top: 20px;
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
+      font-family: "Segoe UI", sans-serif;
+      max-width: 600px;
+      transition: transform 0.2s ease;
+    }
+    .crop-card:hover {
+      transform: translateY(-4px);
+    }
+    .crop-card h3 {
+      margin-bottom: 10px;
+      color: #2f8132;
+      font-size: 1.4em;
+      letter-spacing: 0.5px;
+    }
+    .crop-card p {
+      margin: 8px 0;
+      line-height: 1.5;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="assistant-box">
+    <h2>🌾 Crop Assistant</h2>
+    <input type="text" id="cropInput" placeholder="Enter crop name (e.g. Rice, Wheat)" />
+    <button onclick="fetchCropInfo()">Get Recommendation</button>
+    <div id="output" class="crop-card"></div>
+  </div>
+
+  <script>
+    async function fetchCropInfo() {
+      const crop = document.getElementById("cropInput").value.trim();
+      if (!crop) return;
+
+      const response = await fetch(`/get_crop_info?crop=${encodeURIComponent(crop)}`);
+      const result = await response.json();
+
+      const output = document.getElementById("output");
+      if (result.status === "success") {
+        output.innerHTML = `
+          <h3>🌱 ${crop.toUpperCase()}</h3>
+          <p><strong>🪴 Soil:</strong> ${result.data.soil}</p>
+          <p><strong>☀️ Climate:</strong> ${result.data.climate}</p>
+          <p><strong>💡 Tips:</strong> ${result.data.tips}</p>
+        `;
+      } else {
+        output.innerHTML = `<p style="color: #b30000;"><strong>⚠️ ${result.message}</strong></p>`;
+      }
+    }
+  </script>
+</body>
+</html>

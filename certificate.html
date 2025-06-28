@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Certificate - AgriLearn</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background:#D2E5D0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .certificate {
+      width: 90%;
+      max-width: 800px;
+      border: 8px solid  #013A20;
+      padding: 2em;
+      border-radius: 20px;
+      text-align: center;
+      background: white;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    h1 {
+      font-size: 2em;
+      margin-bottom: 0.5em;
+      color: #4e944f;
+    }
+    h2 {
+      font-size: 1.6em;
+      margin-bottom: 1em;
+    }
+    p {
+      font-size: 1.1em;
+      color: #444;
+    }
+    .btn {
+      margin-top: 2em;
+      background: #013A20;
+      color: white;
+      border: none;
+      padding: 0.8em 1.5em;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+   .btn:hover {
+      background-color: #3d8438;
+    }
+    @media print {
+      .btn {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="certificate">
+    <h1>🎉 Certificate of Completion</h1>
+    <h2>This certifies that</h2>
+    <h2 style="color:#396b3c;">{{ name }}</h2>
+    <p>has successfully completed all learning modules on sustainable agriculture through <strong>AgriLearn</strong>.</p>
+    <p>Your dedication to sustainable farming practices contributes to a greener future! 🌱</p>
+    <button class="btn" onclick="window.print()">Download / Print</button>
+  </div>
+</body>
+</html>

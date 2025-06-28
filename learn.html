@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Learn - AgriLearn</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background: #D2E5D0;
+      
+      padding: 2em;
+    }
+    h2 {
+      text-align: center;
+      color: #013A20;
+    }
+    .progress-wrapper {
+      text-align: center;
+      margin: 1em 0 2em;
+    }
+    .circle {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: conic-gradient(#4e944f {{ (completed/total)*360 if total else 0 }}deg, #ddd 0deg);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 18px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5em;
+      max-width: 1000px;
+      margin: auto;
+    }
+    .card {
+      background:white ;
+     
+      border-radius: 12px;
+      padding: 1em;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+      transform: perspective(800px) rotateX(2deg);
+      transition: 0.3s ease;
+    }
+    .card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+    .card h3 {
+      color: #396b3c;
+    }
+    .btn {
+      background:#4e944f;
+      color: white;
+      padding: 0.5em 1em;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 0.5em;
+    }
+  .btn:hover {
+      background-color: #3d8438;
+    }
+    .complete-tag {
+      color:#4e944f;
+      font-weight: 500;
+      margin-top: 0.5em;
+    }
+    .congrats {
+      text-align: center;
+      color: #013A20;
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-bottom: 1em;
+    }
+  </style>
+  <script>
+    function markCompleted(module) {
+      fetch('/mark_complete', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ module: module })
+      }).then(res => {
+        if (res.ok) location.reload();
+        else alert("Something went wrong.");
+       
+          document.addEventListener('DOMContentLoaded', () => {
+            fetch('/get_progress')
+              .then(res => res.json())
+              .then(data => {
+                const completed = data.completed_modules || [];
+                completed.forEach(module => {
+                  const item = document.getElementById(module);
+                  if (item) {
+                    item.innerHTML += " ✅";
+                    item.style.opacity = "0.6"; // optional: dim to show it's done
+                  }
+                });
+              });
+          });
+     
+
+      });
+    }
+  </script>
+</head>
+<body>
+
+  <h2>Explore Sustainable Practices</h2>
+
+  {% if completed == total and total != 0 %}
+    <div class="congrats">🌟 Congratulations! You’ve completed all modules!</div>
+  {% endif %}
+
+  <div class="progress-wrapper">
+    <div class="circle">
+      {{ (completed/total)*100 if total else 0 | round(0) }}%
+    </div>
+    <p>{{ completed }} out of {{ total }} modules completed</p>
+  </div>
+
+  <div class="grid">
+    {% for key, title in {
+      'organic': 'Organic Farming Basics',
+      'composting': 'Composting at Home',
+     'dripirigation': 'Drip Irrigation',
+      'pest': 'Natural Pest Control',
+      'rainwater': 'Rainwater Harvesting',
+      'intercropping': 'Intercropping'
+    }.items() %}
+    <div class="card">
+      <h3>{{ title }}</h3>
+      <p>Click to start learning this topic in detail.</p>
+      <a href="/module/{{ key }}"><button class="btn">Start Learning</button></a>
+      {% if progress.get(key) %}
+        <div class="complete-tag">✅ Completed</div>
+      {% else %}
+        <button class="btn" onclick="markCompleted('{{ key }}')">Mark as Completed</button>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+
+</body>
+</html>
