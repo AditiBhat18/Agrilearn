@@ -1,0 +1,65 @@
+{
+  "a@gmail.com": {
+    "name": "aditi",
+    "password": "1234",
+    "progress": {
+      "organic": true,
+      "composting": true,
+      "drip": true,
+      "pest": true,
+      "rainwater": true,
+      "intercropping": true
+    }
+  },
+  "aditi@gmail.com": {
+    "name": "Aditi",
+    "password": "1234",
+    "progress": {
+      "organic": true,
+      "composting": true,
+      "drip": false,
+      "pest": true,
+      "rainwater": true,
+      "intercropping": true,
+      "dripirigation": true
+    }
+  },
+  "ash@gmail.com": {
+    "name": "ashwini",
+    "password": "asdf",
+    "progress": {
+      "organic": true,
+      "composting": true,
+      "drip": false,
+      "pest": true,
+      "rainwater": true,
+      "intercropping": true,
+      "dripirigation": true
+    }
+  },
+  "kamathvk556@gmail.com": {
+    "name": "Vaishnavi N Kamath ",
+    "password": "abcd1234",
+    "progress": {
+      "organic": false,
+      "composting": false,
+      "drip": false,
+      "pest": false,
+      "rainwater": false,
+      "intercropping": false
+    }
+  },
+  "sonusonushree58@gmail.com": {
+    "name": "Sonushree C",
+    "password": "Sonu@2006",
+    "progress": {
+      "organic": true,
+      "composting": true,
+      "drip": false,
+      "pest": true,
+      "rainwater": true,
+      "intercropping": true,
+      "dripirigation": true
+    }
+  }
+}
